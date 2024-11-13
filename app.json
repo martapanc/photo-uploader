@@ -33,7 +33,8 @@
         {
           "photosPermission": "The app accesses your photo gallery"
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true
