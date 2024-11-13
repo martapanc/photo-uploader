@@ -1,8 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {Button, Image, StyleSheet, TextInput} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-
-
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import {ThemedText} from '@/components/ThemedText';
 import {ThemedView} from '@/components/ThemedView';
