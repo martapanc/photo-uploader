@@ -5,12 +5,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import {ThemedText} from '@/components/ThemedText';
 import {ThemedView} from '@/components/ThemedView';
 import {useState} from "react";
-
-const config = {
-    cloud_name: 'dwrurydlt',
-    api_key: '135348826679948',
-    api_secret: 'Nelsrm6BkHbwHNERV4rwADD5gMQ',
-}
+import {cloudinary} from "@/constants/config";
 
 export default function UploadScreen() {
     const [title, setTitle] = useState<string>('');
@@ -56,7 +51,7 @@ export default function UploadScreen() {
         formData.append('context', `caption=${title}|alt=${description}`);
 
         try {
-            const response = await fetch(`https://api.cloudinary.com/v1_1/${config.cloud_name}/image/upload`,
+            const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudinary.cloud_name}/image/upload`,
                 {
                     method: 'POST',
                     body: formData,
@@ -85,6 +80,9 @@ export default function UploadScreen() {
                 <ThemedText type="title">Upload</ThemedText>
 
                 <ThemedView style={styles.formContainer}>
+                    <Button title={'Pick a photo'} onPress={pickImage} />
+                    {image && <Image source={{ uri: image }} style={styles.image} />}
+
                     <TextInput
                         placeholder="Photo Title"
                         value={title}
@@ -100,9 +98,6 @@ export default function UploadScreen() {
                         multiline
                     />
 
-                    <Button title={'Pick a photo'} onPress={pickImage} />
-                    {image && <Image source={{ uri: image }} style={styles.image} />}
-
                     <Button title={uploading ? 'Uploading...' : 'Upload'} onPress={handleUpload} />
                 </ThemedView>
             </ThemedView>
@@ -112,10 +107,10 @@ export default function UploadScreen() {
 
 const styles = StyleSheet.create({
     titleContainer: {
-        padding: 20,
+        padding: 4,
     },
     formContainer: {
-        marginTop: 20,
+        marginTop: 10,
         gap: 10,
     },
     input: {
@@ -128,9 +123,10 @@ const styles = StyleSheet.create({
         height: 100,
     },
     image: {
-        width: 100,
-        height: 100,
-        marginTop: 10,
+        width: 300,
+        height: 200,
+        marginTop: 2,
+        alignSelf: 'center'
     },
     headerImage: {
         alignSelf: 'center',
